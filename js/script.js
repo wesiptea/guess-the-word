@@ -66,11 +66,12 @@ const validInput = function (input) {
 const makeGuess = function(guessedLetter) {
     guessedLetter = guessedLetter.toUpperCase();
     // Change all letters to uppercase to avoid issues with case sensitivity
-    console.log(guessedLetter);
     
-    if (validInput.includes(guessedLetters)) {
+    if (validInput.includes(guessedLettersList)) {
         message.innerText = "You have already guessed that letter, try a new letter."
     } else {
-        guessedLetters.push("");
+        validInput.push(guessedLetters);
     }
+    console.log(guessedLetters);
 };
+ 
