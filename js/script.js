@@ -43,7 +43,7 @@ guessButton.addEventListener("click", function(e) {
     const validGuess = validInput(guess);
 
     if (validGuess) {
-        makeGuess(guess);            
+        makeGuess(validGuess);            
     }
     playerGuess.value = "";
     // This empty string clears the box so the next letter can be guessed.
@@ -71,7 +71,36 @@ const makeGuess = function(guessedLetter) {
         message.innerText = "You have already guessed that letter, try a new letter."
     } else {
         guessedLetters.push(guessedLetter);
+        // makeGuess(wordInProgress);
+        updatePageLetters();
+        updateWordInProgress(guessedLetters);
     }
-    console.log(guessedLetters);
 };
+
+const updatePageLetters = function () {
+    guessedLettersList.innerHTML = "";
+    // clearing the list (above)
+
+    for (const letter of guessedLetters) {
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedLettersList.append(li);
+    } 
+};
+
+const updateWordInProgress = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const showWord = [];
+    for (const letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            showWord.push(letter.toUpperCase());
+        } else {
+            showWord.push("●");
+        }
+    }
+};
+// console.log(showWord);
+wordInProgress.innerText = showWord.join("");
+
 
