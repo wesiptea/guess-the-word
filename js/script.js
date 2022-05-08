@@ -99,8 +99,14 @@ const updateWordInProgress = function (guessedLetters) {
             showWord.push("●");
         }
     }
+    wordInProgress.innerText = showWord.join("");
+    checkIfWon();
 };
 // console.log(showWord);
-wordInProgress.innerText = showWord.join("");
 
-
+const checkIfWon = function () {
+    if (word.toUpperCase() === wordInProgress.innerText) {
+        message.classList.add("win");
+        message.innerHTML =`<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    }
+};
