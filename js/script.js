@@ -39,7 +39,7 @@ guessButton.addEventListener("click", function(e) {
 
     // Below: captures the value of the input. Logs out the value of the variable capturing the input. Then, empties the value of the input. 
     // .value is code which allows us to "capture" whatever is entered (playerGuess) into a form.
-    const guess = playerGuess.value;
+    let guess = playerGuess.value;
    
     const validGuess = validInput(guess);
 
@@ -67,13 +67,14 @@ const validInput = function(input) {
 const makeGuess = function(guessedLetter) {
     guessedLetter = guessedLetter.toUpperCase();
     // Change all letters to uppercase to avoid issues with case sensitivity
-    
+    console.log("guessedLetter", guessedLetter);
+
     if (guessedLetters.includes(guessedLetter)) {
         message.innerText = "You have already guessed that letter, try a new letter."
     } else {
         guessedLetters.push(guessedLetter);
         // makeGuess(wordInProgress);
-        guessesRemainingCount(guess);
+        guessesRemainingCount(guessedLetter);
         updatePageLetters();
         updateWordInProgress(guessedLetters);
     }
@@ -109,7 +110,7 @@ const updateWordInProgress = function (guessedLetters) {
 const guessesRemainingCount = function (guess) {
     const uppercaseWord = word.toUpperCase();
     if (!uppercaseWord.includes(guess)) {
-        message.innerText = `This word does not contain ${guess} Try again!`;
+        message.innerText = `This word does not contain ${guess}. Try again!`;
         remainingGuesses -= 1;
         // -= subtracts from a value and assigns the variable the new result
     } else {
