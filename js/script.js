@@ -1,12 +1,12 @@
 const guessedLettersList = document.querySelector(".guessed-letters");
 const guessButton = document.querySelector(".guess");
-// Buttons have been selected w class names, "guess" and "play-again hide," to distiguish them from each other.
 const playerGuess = document.querySelector(".letter");
 const wordInProgress = document.querySelector(".word-in-progress");
 const remainingGuessesElement = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again hide");
+// The two buttons have been selected by class names, ".guess" and ".play-again hide," to distiguish them from each other.
 
 let word = "magnolia";
 const guessedLetters = [];
@@ -146,6 +146,16 @@ const checkIfWon = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
         message.classList.add("win");
         message.innerHTML =`<p class="highlight">You guessed correct the word! Congrats!</p>`;
+
+        startOver();
     }
 };
+
+const startOver = function () {
+    guessButton.classList.remove("hide");
+    remainingGuessesElement.classList.add("hide");
+    guessedLettersList.classList.add("hide");
+    playAgainButton.classList.remove("hide");
+};
+
 
