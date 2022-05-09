@@ -8,10 +8,26 @@ const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again hide");
 
-const word = "magnolia";
+let word = "magnolia";
 const guessedLetters = [];
 // This empty array will contain all of the letters of player guesses
 let remainingGuesses = 8;
+// The above 'let' variables need to be defined using 'let' rather than const since their values need to be reassigned/changed as the code runs.
+
+const getWord = async function () {
+    const getWordAPI = await fetch (
+    'https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt'
+    );
+    const words = await getWordAPI.text();
+    const wordArray = words.split("\n");
+    const selectRandomWord = Math.floor(Math.random() * wordArray.length); 
+    word = wordArray[selectRandomWord].trim();   
+    console.log(wordArray, selectRandomWord);
+    placeholders(word);
+}
+getWord();
+
+
 
 // Display the dots as placeholders for word letters
 const placeholders = function(word) {
@@ -28,7 +44,6 @@ const placeholders = function(word) {
     // If you leave the .join() empty - commas will separate array items. If you include "" w/in the method, commas will not be included. 
     // ex: console.log(alphabet.join("")); // abc
 }
-placeholders(word);
 
 guessButton.addEventListener("click", function(e) {
     e.preventDefault();
