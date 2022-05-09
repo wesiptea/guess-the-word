@@ -11,7 +11,7 @@ const playAgainButton = document.querySelector(".play-again hide");
 const word = "magnolia";
 const guessedLetters = [];
 // This empty array will contain all of the letters of player guesses
-const remainingGuesses = 8;
+let remainingGuesses = 8;
 
 // Display the dots as placeholders for word letters
 const placeholders = function(word) {
@@ -111,6 +111,7 @@ const guessesRemainingCount = function (guess) {
     const uppercaseWord = word.toUpperCase();
     if (!uppercaseWord.includes(guess)) {
         message.innerText = `This word does not contain ${guess}. Try again!`;
+
         remainingGuesses -= 1;
         // -= subtracts from a value and assigns the variable the new result
     } else {
@@ -118,7 +119,7 @@ const guessesRemainingCount = function (guess) {
     }
     
     if (remainingGuesses === 0) {
-        message.innerHTML = `Sorry, you have run out of guesses - game over. The word was <span class="highlight">${word}</span>. Try a new word!`;
+        message.innerHTML = `Sorry, you have run out of guesses! The word was <span class="highlight">${word}</span>. Try a new word!`;
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
