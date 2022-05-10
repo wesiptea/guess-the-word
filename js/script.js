@@ -5,7 +5,7 @@ const wordInProgress = document.querySelector(".word-in-progress");
 const remainingGuessesElement = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
-const playAgainButton = document.querySelector(".play-again hide");
+const playAgainButton = document.querySelector(".play-again");
 // The two buttons have been selected by class names, ".guess" and ".play-again hide," to distiguish them from each other.
 
 let word = "magnolia";
@@ -152,10 +152,28 @@ const checkIfWon = function () {
 };
 
 const startOver = function () {
-    guessButton.classList.remove("hide");
+    guessButton.classList.add("hide");
     remainingGuessesElement.classList.add("hide");
     guessedLettersList.classList.add("hide");
     playAgainButton.classList.remove("hide");
 };
+
+playAgainButton.addEventListener("click", function() {
+    message.classList.remove("win");
+    guessedLetter = [];
+    remainingGuesses = 8;
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    guessedLettersList.innerHTML = "";
+    message.innerText = "";
+
+    // Grab a new word from array
+    getWord();
+
+    // Revealing and hiding the correct UI elements
+    guessButton.classList.add("hide");
+    playAgainButton.classList.remove("hide");
+    remainingGuessesElement.classList.remove("hide");
+    guessedLettersList.classList.remove("hide");
+});
 
 
