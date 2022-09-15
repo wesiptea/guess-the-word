@@ -12,7 +12,6 @@ let word = "magnolia";
 let guessedLetters = [];
 // This empty array will contain all of the letters of player guesses
 let remainingGuesses = 8;
-// The above 'let' variables need to be defined using 'let' rather than const since their values need to be reassigned/changed as the code runs.
 
 const getWord = async function () {
     const getWordAPI = await fetch(
@@ -87,7 +86,7 @@ const makeGuess = function (guessedLetter) {
         message.innerText = "You have already guessed that letter, try a new letter."
     } else {
         guessedLetters.push(guessedLetter);
-        // makeGuess(wordInProgress);
+        // console.log(guessedLetters);
         guessesRemainingCount(guessedLetter);
         updateGuessedLetters();
         updateWordInProgress(guessedLetters);
@@ -133,6 +132,7 @@ const guessesRemainingCount = function (guess) {
 
     if (remainingGuesses === 0) {
         message.innerHTML = `Sorry, you have run out of guesses! The word was <span class="highlight">${word}</span>. Try a new word!`;
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
         startOver();
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
@@ -145,6 +145,7 @@ const checkIfWon = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
         message.classList.add("win");
         message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+        remainingGuessesElement.classList.add("hide");
         startOver();
     }
 };
@@ -158,7 +159,7 @@ const startOver = function () {
 
 playAgainButton.addEventListener("click", function () {
     message.classList.remove("win");
-    guessedLetter = [];
+    guessedLetters = [];
     remainingGuesses = 8;
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
     guessedLettersList.innerHTML = "";
